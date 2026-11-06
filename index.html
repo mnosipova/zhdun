@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Ждун в Суздале — угадай цену аренды на Авито и узнай, олигарх ты из 2007-го или нет">
+<title>Ждун в Суздале — угадай цену</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛋️</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ СТАРТОВЫЙ ЭКРАН ============ -->
+<section id="screen-start" class="screen active">
+  <div class="card start-card">
+    <div class="zhdun-emoji">🛋️</div>
+    <h1 class="game-title">Ждун<br>в Суздале</h1>
+    <p class="start-hello">Превед, медвед! (Йа креведко)</p>
+    <div class="rules">
+      <p>Покажем тебе 10 лотов из Суздаля: квартиры и дома с Авито, все активные, ня.шки.</p>
+      <p>Твоя миссия — дёргать бегунок и угадать <b>цену за сутки</b>. Чем ближе к реальной цене — тем больше баллов (максимум 100 за лот).</p>
+      <p>В конце узнаешь, кто ты: <b>«Сын маминой подруги»</b>, <b>«Олигарх из 2007-го»</b> или пора кричать <b>«Верните мой 2007!»</b></p>
+      <p class="rules-note">денег нет, но вы держитесь. ИМХО: всё сложно, но это жиза.</p>
+    </div>
+    <button id="btn-start" class="btn btn-big">▶ ЗАПУСК ИГРЫ</button>
+    <p class="tiny-note">жми «тыц-тыц», Ололо гарантировано</p>
+  </div>
+</section>
+
+<!-- ============ ЭКРАН ЛОТА ============ -->
+<section id="screen-round" class="screen">
+  <div class="topbar">
+    <div class="round-label">ЛОТ <span id="round-num">1</span>/10</div>
+    <div class="score-chip">Очки: <b id="score-now">0</b></div>
+  </div>
+  <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+
+  <div class="card lot-card">
+    <!-- Галерея -->
+    <div id="gallery" class="gallery"></div>
+    <div id="gallery-dots" class="gallery-dots"></div>
+
+    <div class="lot-info">
+      <h2 id="lot-title" class="lot-title"></h2>
+      <p id="lot-address" class="lot-address"></p>
+    </div>
+
+    <!-- Блок угадывания -->
+    <div id="guess-block">
+      <div class="price-guess">
+        <span class="price-value" id="guess-value">6 000 ₽</span>
+        <span class="price-hint">/ сутки — твоё ИМХО</span>
+      </div>
+      <input type="range" id="price-slider" class="slider" min="1000" max="25000" step="50" value="6000" aria-label="Ползунок цены">
+      <div class="slider-bounds"><span>1 000 ₽</span><span>25 000 ₽</span></div>
+      <button id="btn-submit" class="btn btn-big">ОЦЕНИТЬ, тыц-тыц</button>
+    </div>
+
+    <!-- Блок результата лота -->
+    <div id="reveal-block" class="hidden">
+      <p class="verdict-meme" id="round-meme"></p>
+      <div class="price-compare">
+        <div class="pc-cell">
+          <span class="pc-label">Ты сказал</span>
+          <span class="pc-value" id="my-price"></span>
+        </div>
+        <div class="pc-vs">vs</div>
+        <div class="pc-cell">
+          <span class="pc-label">Реальная цена</span>
+          <span class="pc-value pc-real" id="real-price"></span>
+        </div>
+      </div>
+      <p id="round-diff" class="round-diff"></p>
+      <p id="round-points" class="round-points"></p>
+      <a id="lot-link" class="lot-link" target="_blank" rel="noopener">→ открыть реальное объявление на Авито</a>
+      <button id="btn-next" class="btn btn-big">ДАЛЬШЕ →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ИТОГОВЫЙ ЭКРАН ============ -->
+<section id="screen-result" class="screen">
+  <div class="card result-card">
+    <div class="zhdun-emoji">🏅</div>
+    <p class="result-kicker">Итог раунда. как-то так.</p>
+    <h2 id="result-title" class="result-title"></h2>
+    <p id="result-meme" class="result-meme"></p>
+    <div class="result-stats">
+      <div class="rs-cell"><span class="rs-label">Баллы</span><span class="rs-value" id="result-score"></span></div>
+      <div class="rs-cell"><span class="rs-label">Средняя ошибка</span><span class="rs-value" id="result-err"></span></div>
+      <div class="rs-cell"><span class="rs-label">Твои цены в среднем</span><span class="rs-value" id="result-bias"></span></div>
+    </div>
+    <div id="result-details" class="result-details"></div>
+    <button id="btn-restart" class="btn btn-big">ИГРАТЬ ЕЩЁ, аффтар, пеши исчо</button>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
